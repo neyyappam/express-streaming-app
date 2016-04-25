@@ -24,6 +24,7 @@
   "homepage": "https://github.com/subii/express-streaming-app#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "http-observable": "0.0.1",
     "request": "^2.71.0",
     "rx": "^4.1.0",
     "rx-node": "^1.0.2"

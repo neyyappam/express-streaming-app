@@ -3,7 +3,7 @@ var app = express();
 var request = require('request');
 var Observable = require('rx').Observable;
 var RxNode = require('rx-node');
-var HttpObservable = require('./lib/HttpObservable');
+var HttpObservable = require('http-observable');
 
 app.get('/pipe', function (req, res) {
   req.pipe(request('http://api.sba.gov/geodata/city_county_links_for_state_of/ca.json')).pipe(res);
