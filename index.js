@@ -29,19 +29,20 @@ app.get('/write', function (req, res) {
 });
 
 app.get('/stream', function (req, res) {
-    console.log('====> here at stream');
     res.write('<html><head></head>');
     //Immediately write the first tag of body. This will make express to add the header `Transfer-Encoding:chunked`
     res.write('<body>');
 
-    new HttpObservable({
+    var opts = {
         hostname: 'localhost',
         port: 8000,
         path: '/write'
 
-    }).subscribe(
+    };
+
+    new HttpObservable(opts).subscribe(
           function onNext(i) {
-              res.write('<div>' + i + ' Hello world' + '</div>');
+              res.write(i);
           },
           function onError() {
               res.write('error');
