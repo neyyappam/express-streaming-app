@@ -10,6 +10,9 @@ app.get('/pipe', function (req, res) {
 });
 
 app.get('/write', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
   res.write('<html><head></head>');
   //Immediately write the first tag of body. This will make express to add the header `Transfer-Encoding:chunked`
   res.write('<body>');
@@ -29,6 +32,8 @@ app.get('/write', function (req, res) {
 });
 
 app.get('/stream', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Credentials', true);
     res.write('<html><head></head>');
     //Immediately write the first tag of body. This will make express to add the header `Transfer-Encoding:chunked`
     res.write('<body>');
@@ -46,6 +51,27 @@ app.get('/stream', function (req, res) {
           },
           function onError() {
               res.write('error');
+          },
+          function onCompleted() {
+              res.end('</body></html>');
+          }
+      );
+
+});
+
+app.get('/data', function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.write('<html><head></head>');
+    res.write('<body>');
+
+    Observable.interval(100).take(10).
+      subscribe(
+          function onNext(i) {
+              res.write(i + '');
+          },
+          function onError() {
+              res.write('ERROR');
           },
           function onCompleted() {
               res.end('</body></html>');
