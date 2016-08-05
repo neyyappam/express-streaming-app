@@ -4,13 +4,14 @@ var request = require('request');
 var Observable = require('rx').Observable;
 var RxNode = require('rx-node');
 var HttpObservable = require('http-observable');
+var port = process.env.PORT || 8000;
 
 app.get('/pipe', function (req, res) {
   req.pipe(request('http://api.sba.gov/geodata/city_county_links_for_state_of/ca.json')).pipe(res);
 });
 
 app.get('/write', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', req.get('Origin')|| '');
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin') || '');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
   res.write('<html><head></head>');
@@ -80,6 +81,6 @@ app.get('/data', function (req, res) {
 
 });
 
-app.listen(80, function () {
+app.listen(port, function () {
   console.log('Example app listening on port 80!');
 });
