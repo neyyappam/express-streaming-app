@@ -10,7 +10,7 @@ app.get('/pipe', function (req, res) {
 });
 
 app.get('/write', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin')|| '');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
   res.write('<html><head></head>');
@@ -32,7 +32,7 @@ app.get('/write', function (req, res) {
 });
 
 app.get('/stream', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin') || '');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.write('<html><head></head>');
     //Immediately write the first tag of body. This will make express to add the header `Transfer-Encoding:chunked`
@@ -60,7 +60,7 @@ app.get('/stream', function (req, res) {
 });
 
 app.get('/data', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin') || '');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.write('<html><head></head>');
     res.write('<body>');
@@ -80,6 +80,6 @@ app.get('/data', function (req, res) {
 
 });
 
-app.listen(8000, function () {
-  console.log('Example app listening on port 8000!');
+app.listen(80, function () {
+  console.log('Example app listening on port 80!');
 });
